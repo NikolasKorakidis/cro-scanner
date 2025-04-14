@@ -28,16 +28,19 @@ A modern web application for scanning and analyzing CRO (Conversion Rate Optimiz
 ## 📦 Installation
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/NikolasKorakidis/cro-scanner.git
 ```
 
 2. Install dependencies:
+
 ```bash
 pnpm install
 ```
 
 3. Run the development server:
+
 ```bash
 pnpm dev
 ```
@@ -60,6 +63,7 @@ cro-scanner/
 ## 🎨 UI Components
 
 The project includes a rich set of UI components:
+
 - Accordion
 - Alert Dialog
 - Avatar
@@ -92,4 +96,4 @@ Nikolas Korakidis - [GitHub](https://github.com/NikolasKorakidis)
 
 <div align="center">
   <sub>Built with ❤️ by Nikolas Korakidis</sub>
-</div> 
+</div>
