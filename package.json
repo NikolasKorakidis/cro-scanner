@@ -1,0 +1,23 @@
+{
+  "name": "cro-scanner",
+  "version": "1.0.0",
+  "description": "Website audit and CRO analysis tool",
+  "main": "index.js",
+  "scripts": {
+    "start": "cd client && npm start",
+    "server": "cd server && npm start",
+    "dev": "concurrently \"npm run server\" \"npm run start\"",
+    "install-all": "npm install && cd client && npm install && cd ../server && npm install"
+  },
+  "keywords": [
+    "cro",
+    "website",
+    "audit",
+    "analysis"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
