@@ -10,6 +10,7 @@ import ImplementationRoadmap from '../ImplementationRoadmap';
 import UniversalConversionDrivers from '../UniversalConversionDrivers';
 import Benchmarks from '../Benchmarks';
 import { AuditReport as AuditReportType } from '../../types/audit';
+import { useTheme } from '../../context/ThemeContext';
 
 interface AuditReportProps {
   data: AuditReportType;
@@ -17,6 +18,7 @@ interface AuditReportProps {
 
 const AuditReport: React.FC<AuditReportProps> = ({ data }) => {
   const pdfRef = useRef<PDFExport>(null);
+  const { theme } = useTheme();
 
   const handleExportPDF = () => {
     if (pdfRef.current) {
@@ -24,26 +26,18 @@ const AuditReport: React.FC<AuditReportProps> = ({ data }) => {
     }
   };
 
-  const parseMarkdownSection = (content: string, sectionTitle: string) => {
-    const sectionRegex = new RegExp(`## ${sectionTitle}\\n\\n([\\s\\S]*?)(?=##|$)`);
-    const match = content.match(sectionRegex);
-    return match ? match[1].trim() : '';
-  };
-
-  const strategicFoundation = parseMarkdownSection(data.strategicFoundation, 'Strategic Foundation');
-  const dataSynthesis = parseMarkdownSection(data.strategicFoundation, 'Data Synthesis Requirements');
-  const adaptiveOutput = parseMarkdownSection(data.strategicFoundation, 'Adaptive Output Structure');
-
   return (
-    <div className="mt-8">
+    <div className={`space-y-8 ${theme === 'dark' ? 'text-gray-100' : 'text-gray-900'}`}>
       <div className="flex justify-end mb-4">
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={handleExportPDF}
-          className="flex items-center space-x-2 px-4 py-2 bg-green-500 rounded-lg text-white hover:bg-green-600"
+          className={`flex items-center gap-2 px-4 py-2 rounded-lg ${
+            theme === 'dark' ? 'bg-blue-600 hover:bg-blue-700' : 'bg-blue-500 hover:bg-blue-600'
+          } text-white transition-colors`}
         >
-          <DocumentArrowDownIcon className="h-5 w-5" />
+          <DocumentArrowDownIcon className="w-5 h-5" />
           <span>Download PDF</span>
         </motion.button>
       </div>
@@ -53,35 +47,11 @@ const AuditReport: React.FC<AuditReportProps> = ({ data }) => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-gray-800 rounded-lg p-6"
+            className={`p-6 rounded-lg ${theme === 'dark' ? 'bg-gray-800' : 'bg-white shadow'}`}
           >
             <h2 className="text-2xl font-bold mb-4">Strategic Foundation</h2>
-            <div className="prose prose-invert max-w-none">
-              <ReactMarkdown>{strategicFoundation}</ReactMarkdown>
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="bg-gray-800 rounded-lg p-6"
-          >
-            <h2 className="text-2xl font-bold mb-4">Data Synthesis</h2>
-            <div className="prose prose-invert max-w-none">
-              <ReactMarkdown>{dataSynthesis}</ReactMarkdown>
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="bg-gray-800 rounded-lg p-6"
-          >
-            <h2 className="text-2xl font-bold mb-4">Adaptive Output</h2>
-            <div className="prose prose-invert max-w-none">
-              <ReactMarkdown>{adaptiveOutput}</ReactMarkdown>
+            <div className="prose dark:prose-invert max-w-none">
+              <ReactMarkdown>{data.strategicFoundation}</ReactMarkdown>
             </div>
           </motion.div>
 
