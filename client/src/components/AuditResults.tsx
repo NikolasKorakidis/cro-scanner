@@ -1,5 +1,7 @@
 'use client';
 
+import Charts from './Charts';
+
 interface AuditResultsProps {
   data: {
     audit: string;
@@ -49,6 +51,9 @@ export default function AuditResults({ data }: AuditResultsProps) {
           </div>
         );
       })}
+
+      {/* Add Charts at the bottom of the report */}
+      <Charts data={data} />
     </div>
   );
-} 
+}
