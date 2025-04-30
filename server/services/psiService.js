@@ -9,6 +9,9 @@ const getPageSpeedData = async (url) => {
 
   const { data } = await axios.get(endpoint);
 
+  // Log the complete API response
+  console.log("📊 Complete PageSpeed API Response:", JSON.stringify(data, null, 2));
+
   if (!data.lighthouseResult || !data.lighthouseResult.categories) {
     console.error("❌ Invalid PageSpeed response:", JSON.stringify(data, null, 2));
     throw new Error("Invalid PageSpeed response: no lighthouseResult found.");
